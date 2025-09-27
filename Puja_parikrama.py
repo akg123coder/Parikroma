@@ -4,17 +4,7 @@ import folium
 from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 import re
-
-
-
-""" uploaded_file = st.file_uploader("আপনার KML ফাইল আপলোড করুন", type=["txt", "kml"])
-
-if uploaded_file is not None:
-    content = uploaded_file.read().decode("utf-8")
-    coordinates = re.findall(r"([\\d\\.\\-]+),([\\d\\.\\-]+)", content)
-    coords = [(float(lat), float(lon)) for lat, lon in coordinates]
-    """
-    import pandas as pd
+import pandas as pd
 st.title("পূজা প্যান্ডেল রুট অপ্টিমাইজার")
 uploaded_file = st.file_uploader("Upload your Puja Pandal coordinates file", type=["txt", "csv"])
 
