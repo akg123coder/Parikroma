@@ -12,7 +12,7 @@ uploaded_file = st.file_uploader("আপনার KML ফাইল আপলো�
 if uploaded_file is not None:
     content = uploaded_file.read().decode("utf-8")
     coordinates = re.findall(r"([\\d\\.\\-]+),([\\d\\.\\-]+)", content)
-    coords = [(float(lat), float(lon)) for lon, lat in coordinates]
+    coords = [(float(lat), float(lon)) for lat, lon in coordinates]
 
     if coords:
         st.success(f"মোট {len(coords)} টি লোকেশন পাওয়া গেছে।")
