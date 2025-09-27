@@ -5,14 +5,26 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 import re
 
-st.title("পূজা প্যান্ডেল রুট অপ্টিমাইজার")
 
-uploaded_file = st.file_uploader("আপনার KML ফাইল আপলোড করুন", type=["txt", "kml"])
+
+/* uploaded_file = st.file_uploader("আপনার KML ফাইল আপলোড করুন", type=["txt", "kml"])
 
 if uploaded_file is not None:
     content = uploaded_file.read().decode("utf-8")
     coordinates = re.findall(r"([\\d\\.\\-]+),([\\d\\.\\-]+)", content)
     coords = [(float(lat), float(lon)) for lat, lon in coordinates]
+*/
+    import pandas as pd
+st.title("পূজা প্যান্ডেল রুট অপ্টিমাইজার")
+uploaded_file = st.file_uploader("Upload your Puja Pandal coordinates file", type=["txt", "csv"])
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    if "Latitude" in df.columns and "Longitude" in df.columns:
+        coords = list(zip(df["Latitude"], df["Longitude"]))
+        st.success(f"Extracted {len(coords)} coordinates.")
+    else:
+        st.error("File must contain 'Latitude' and 'Longitude' columns.")
 
     if coords:
         st.success(f"মোট {len(coords)} টি লোকেশন পাওয়া গেছে।")
